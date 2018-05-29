@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--宝箱布局-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#aa000000"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/ivLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_box_bg_light"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/ivClosedBox"
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_box_closed_box"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivClosedBox"
+        android:layout_centerHorizontal="true"
+        android:maxHeight="80dp"
+        android:maxWidth="280dp"
+        android:text="恭喜你获得一个宝箱"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:visibility="visible" />
+
+    <com.dongchen.keydemo.animation.MatrixButton
+        android:id="@+id/btnOpenBox"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvTip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ic_box_btn_open_box"
+        android:visibility="visible" />
+
+</RelativeLayout>
