@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="customAttr1" format="integer"/>
-
-    <declare-styleable name="customStyleable">
-        <attr name="customAttr2" format="string"/>
+    <!--自定义View：环形饼状图-->
+    <declare-styleable name="PieChartView">
+        <attr name="strokeWidthDip" format="integer"/>
+        <attr name="useCenter" format="boolean"/>
+        <attr name="isFillPaint" format="boolean"/>
+        <attr name="isAnimation" format="boolean"/>
     </declare-styleable>
+
+
 </resources>

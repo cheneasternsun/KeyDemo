@@ -3,6 +3,8 @@ package com.dongchen.keydemo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,14 +16,14 @@ import java.util.List;
 
 /**
  * 首页
- * 
+ *
  * @author dongchen
- * created at 2018/5/26 16:34
- * 
- * 功能：
- * 目的：
+ *         created at 2018/5/26 16:34
+ *         <p/>
+ *         功能：
+ *         目的：
  */
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
     private final int EXPLICIT_JUMP = 1;    //显式启动
     private final int IMPLICIT_JUMP = 0;    //隐式启动
 
@@ -29,6 +31,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar ab = getSupportActionBar();
+        if (null != ab) {
+            getSupportActionBar().hide();
+        }
 
         ListView listView = (ListView) findViewById(R.id.listView);
         ListViewAdapter adapter = new ListViewAdapter(MainActivity.this, getList());
@@ -36,10 +42,9 @@ public class MainActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 JumpBean jumpBean = (JumpBean) parent.getItemAtPosition(position);
-
                 if (null == jumpBean) return;
+
                 if (EXPLICIT_JUMP == jumpBean.getJumpType()) { //显式启动
                     try {
                         Intent intent = new Intent(MainActivity.this, Class.forName(jumpBean.getAbsClsUrlOrAction()));
@@ -47,7 +52,6 @@ public class MainActivity extends Activity {
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
-
                 } else {
                     Intent intent = new Intent();
                     intent.setAction(jumpBean.getAbsClsUrlOrAction());
@@ -57,19 +61,12 @@ public class MainActivity extends Activity {
         });
     }
 
-    private List getList() {
-        List list = new ArrayList();
+    private ArrayList<JumpBean> getList() {
+        ArrayList<JumpBean> list = new ArrayList<>();
 
         /*添加数据*/
 
-        /*//Test 显式启动 隐式启动
-        JumpBean j1 = new JumpBean();
-        j1.setJumpType(EXPLICIT_JUMP);
-        j1.setPage(0);
-        j1.setContent("Explicit Jump Test 显示启动");
-        j1.setAbsClsUrlOrAction("com.dongcheng.qunyingzhuandemo.test.ExplicitJumpTestActivity");
-        list.add(j1);
-
+        /*
         JumpBean j2 = new JumpBean();
         j2.setJumpType(IMPLICIT_JUMP);
         j1.setPage(0);
@@ -92,13 +89,20 @@ public class MainActivity extends Activity {
         j1.setContent("Animation");
         j1.setAbsClsUrlOrAction("com.dongchen.keydemo.animation.AnimationActivity");
         list.add(j1);
+        //Custom View
+        JumpBean j2 = new JumpBean();
+        j2.setJumpType(EXPLICIT_JUMP);
+        j2.setPage(0);
+        j2.setContent("Custom View");
+        j2.setAbsClsUrlOrAction("com.dongchen.keydemo.customview.CustomViewActivity");
+        list.add(j2);
 
 
         //排序
-        Collections.sort(list, new Comparator() {
+        Collections.sort(list, new Comparator<JumpBean>() {
             @Override
-            public int compare(Object lhs, Object rhs) {
-                return ((JumpBean)rhs).getPage() - ((JumpBean)lhs).getPage();   //递减
+            public int compare(JumpBean lhs, JumpBean rhs) {
+                return rhs.getPage() - lhs.getPage();   //递减
             }
         });
 

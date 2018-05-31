@@ -14,7 +14,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".animation.AnimationActivity"/>
+
+        <activity android:name=".animation.AnimationActivity"
+            android:label="Animation"/>
+        <activity android:name=".customview.CustomViewActivity"
+            android:label="Custom View"/>
 
     </application>
 
