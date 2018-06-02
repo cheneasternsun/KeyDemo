@@ -86,40 +86,6 @@ public class PieChartViewWithoutAnimation extends View {
         mLinePaint.setStrokeWidth(3f);
     }
 
-    //    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//        mWidth = measure(widthMeasureSpec);
-//        mHeigth = measure(heightMeasureSpec);
-//        mCircleX = mWidth / 2;
-//        mCircleY = mHeigth / 2;
-//        int min = Math.min(mWidth, mHeigth) / 2;
-//
-//        if (Paint.Style.FILL == paintStytle) {//实心圆
-//            mRadius = min;
-//        } else if (Paint.Style.STROKE == paintStytle && min > mStrokeWidth){//弧
-//            mRadius = min - mStrokeWidth/2;//注:要减去 Stroke 宽度
-//        } else {
-//            throw new ArithmeticException("mStrokeWidth 必须小于图宽度的一半, 即 mStrokeWidth 必须小于 Math.min(mWidth, mHeigth) / 2"
-//                    + "\n当前 " + " mStrokeWidth = " + mStrokeWidth + " Math.min(mWidth, mHeigth) / 2 = " + Math.min(mWidth, mHeigth) / 2);
-//        }
-//        mArcRectF = new RectF(mCircleX - mRadius, mCircleY - mRadius, mCircleX + mRadius, mCircleY + mRadius);
-//
-//        setMeasuredDimension(mWidth, mHeigth);
-//    }
-//
-//    private int measure(int measureSpec) {
-//        int specMode = MeasureSpec.getMode(measureSpec);
-//        int specSize = MeasureSpec.getSize(measureSpec);
-//        int result = 200;
-//        if (specMode == MeasureSpec.EXACTLY) {// 精确尺寸
-//            result = specSize;
-//        } else if (specMode == MeasureSpec.AT_MOST) {// 最大可获得的空间
-//            result = specSize;
-//        }
-//        return result;
-//    }
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
