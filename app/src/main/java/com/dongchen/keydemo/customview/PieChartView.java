@@ -94,7 +94,7 @@ public class PieChartView extends View {
      * @param piecesColor 各个碎片对应的颜色, 元素值如 "#55667788"
      */
     public void setPiecesParams(double[] piecesValue, String[] piecesColor) {
-        //合法性判断
+        //合法性判断：于入口处控制，避免后面出现太多判断
         if (piecesColor.length != piecesValue.length || 0 == piecesValue.length)
             throw new CustomViewException("碎片个数等于颜色个数,且个数大于0");
         for (double aPiecesValue : piecesValue) {
@@ -175,11 +175,20 @@ public class PieChartView extends View {
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);
         int result = 200;
-        if (specMode == MeasureSpec.EXACTLY) {// 精确尺寸
-            result = specSize;
-        } else if (specMode == MeasureSpec.AT_MOST) {// 最大可获得的空间
-            result = specSize;
+
+        switch (specMode) {
+            case MeasureSpec.AT_MOST:
+                result = Math.min(result, specSize);
+                break;
+            case MeasureSpec.EXACTLY:
+            case MeasureSpec.UNSPECIFIED:
+                result = specSize;
+                break;
+            default:
+                result = specSize;
+                break;
         }
+
         return result;
     }
 
@@ -356,6 +365,37 @@ public class PieChartView extends View {
         return (float) (mCircleY - r * Math.sin((360 - angle) * Math.PI / 180));
     }
 }
+
+/**
+ * 结果：
+ *
+ * 总结：
+ * 一、步骤
+ * 1、据程序功能确定入口参数。
+ * drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint)、
+ * drawLine(float startX, float startY, float stopX, float stopY, Paint paint)、
+ * 具有动画效果。
+ * 确定程序入口参数：PaintStyle、StrokeWith、isAnimation。
+ * 2、明确不同线程中的所有流程。
+ * UI线程：
+ * 流程1：a、创建PieChartView：代码（含入参） b、设置setPiecesParams(double[] piecesValue, String[] piecesColor)；
+ * 流程2：a、创建PieChartView：xml（含入参）  b、设置setPiecesParams(double[] piecesValue, String[] piecesColor)。
+ *
+ * View测量、布局、绘制的线程：
+ * 流程1：
+ * a、重写onMeasure（处理wrap_content、padding）
+ * b、重写onSizeChanged（获取Circle的mRectF、mRadius、mPivotX、mPivotY）
+ * c、重写onDraw（据mAnimHasGoneAngle 多次重复 drawCircle、drawLine）
+ *
+ * 二、关键
+ * 1、确定程序的所有入口，每个入口是一个流程图的开始。
+ * 2、据程序功能确定程序入口参数（对象的入参）。
+ * 3、合法性判断：于入口处控制，避免后面出现太多判断，简化逻辑。
+ * 4、流程图的每个步骤是一个方法，据该步骤功能确定输入（方法的入参）、输出。
+ * 5、区分不同线程各自的流程。
+ *
+ * 总之，根据对应的功能确定各自的入参，然后据所有入参确定全局变量即Feild（为使程序简单，Feild应尽可能少）。
+ */
 
 
 /*public class PieChartView extends View {
