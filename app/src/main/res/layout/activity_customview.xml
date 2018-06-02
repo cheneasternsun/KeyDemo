@@ -5,13 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.dongchen.keydemo.customview.PieChartView
-        android:id="@+id/pieChartView"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        app:isAnimation="true"
-        app:isFillPaint="false"
-        app:strokeWidthDip="20"/>
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.dongchen.keydemo.customview.PieChartView
+            android:id="@+id/pieChartView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical"
+            app:isAnimation="true"
+            app:isFillPaint="false"
+            app:strokeWidthDip="25"/>
+    </LinearLayout>
 
 </LinearLayout>

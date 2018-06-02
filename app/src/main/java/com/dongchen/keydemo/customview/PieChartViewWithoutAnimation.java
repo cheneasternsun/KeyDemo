@@ -96,14 +96,14 @@ public class PieChartViewWithoutAnimation extends View {
 //        int min = Math.min(mWidth, mHeigth) / 2;
 //
 //        if (Paint.Style.FILL == paintStytle) {//实心圆
-//            mCircleRadius = min;
+//            mRadius = min;
 //        } else if (Paint.Style.STROKE == paintStytle && min > mStrokeWidth){//弧
-//            mCircleRadius = min - mStrokeWidth/2;//注:要减去 Stroke 宽度
+//            mRadius = min - mStrokeWidth/2;//注:要减去 Stroke 宽度
 //        } else {
 //            throw new ArithmeticException("mStrokeWidth 必须小于图宽度的一半, 即 mStrokeWidth 必须小于 Math.min(mWidth, mHeigth) / 2"
 //                    + "\n当前 " + " mStrokeWidth = " + mStrokeWidth + " Math.min(mWidth, mHeigth) / 2 = " + Math.min(mWidth, mHeigth) / 2);
 //        }
-//        mArcRectF = new RectF(mCircleX - mCircleRadius, mCircleY - mCircleRadius, mCircleX + mCircleRadius, mCircleY + mCircleRadius);
+//        mArcRectF = new RectF(mCircleX - mRadius, mCircleY - mRadius, mCircleX + mRadius, mCircleY + mRadius);
 //
 //        setMeasuredDimension(mWidth, mHeigth);
 //    }
@@ -147,7 +147,7 @@ public class PieChartViewWithoutAnimation extends View {
         }
         mArcRectF = new RectF(mCircleX - mCircleRadius, mCircleY - mCircleRadius, mCircleX + mCircleRadius, mCircleY + mCircleRadius);
 
-        Log.i("PieChartView", "PieChartView--->mCircleRadius = " + mCircleRadius);
+        Log.i("PieChartView", "PieChartView--->mRadius = " + mCircleRadius);
     }
 
     /**

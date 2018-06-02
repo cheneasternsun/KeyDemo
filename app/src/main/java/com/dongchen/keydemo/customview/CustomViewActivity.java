@@ -27,9 +27,19 @@ public class CustomViewActivity extends BaseActivity {
 
         setContentView(R.layout.activity_customview);
         PieChartView pieChartView = (PieChartView) findViewById(R.id.pieChartView);
-        pieChartView.setPiecesParams(3,
-                new String[] {"#55ff0000", "#5500ff00", "#550000ff"},
-                new double[] {3, 100, 257});
+        pieChartView.setPiecesParams(
+                new double[] {1.333, 150.22, 207.77},
+                new String[] {"#55ff0000", "#5500ff00", "#550000ff"});
+        LinearLayout ll = (LinearLayout) findViewById(R.id.ll);
+        PieChartView p = new PieChartView(this, 0, true, true);
+        p.setPiecesParams(
+                new double[] {1.333, 150.22, 207.77},
+                new String[] {"#55ff0000", "#5500ff00", "#550000ff"});
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        p.setLayoutParams(lp);
+
+        ll.addView(p);
     }
 
 }
